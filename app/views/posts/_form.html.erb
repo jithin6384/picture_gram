@@ -1,0 +1,35 @@
+<div class="posts-wrapper">
+ <div class="post">
+  <div class="post-body">
+  <div class="image-wrap">
+
+ <%# placeholder = params["action"]=="new" ? 'placeholder.png' : @post.image%>
+   <%= image_tag placeholder(params), id: 'image-preview', class: 'img-responsive' %>'
+    <%= simple_form_for @post, html: {class: 'form-horizontal', multipart: true} do |f| %>
+
+   <div class="row">
+    <div class="col-md-12 text-center">
+       <%= f.error_notification %>
+     </div>
+    </div>
+	 
+	<div class="container-fluid">
+	<div class="form-group text-center">
+	<h4>Upload an Image (this is required): </h4>
+	 <%= f.input :image, label: false, input_html: {
+	 	onchange: 'loadfile(event)'
+	 	} %>
+	</div>
+	<div class="form-group text-center">
+	 <%= f.input :title, label: false, placeholder: 'Add your title' %>
+	</div>
+
+	<div class="form-group text-center">
+	 <%= f.button :submit, class: 'btn-success' %>
+	</div>
+	</div>
+   <%end%>
+</div>
+</div>
+</div>
+</div>

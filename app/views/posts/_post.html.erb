@@ -1,0 +1,57 @@
+ <div class="post">
+     <div class = "post-head">
+        <div class="thumb-img"></div>
+        <div class="time-ago">
+          <%= time_ago_in_words post.created_at %>
+        </div>
+        <div class="user-name">
+          <%= (link_to post.user.user_name,profile_path(post.user.user_name)) if post.user.present?%>
+        </div>
+     </div>
+
+     <div class="image center-block">
+	       <%= link_to (image_tag post.image.url(:medium), class: 'img-responsive'),post_path(post) %>
+	   </div>
+     <div class="post-bottom">
+       <div class="title">
+        <p> </p>
+          
+          <div class="title-content">
+            <%= post.title%>
+          </div>
+       </div>
+
+       <div class="comments" id="comments_<%= post.id%>">
+            <%if post.comments %>
+             <%# @post = post %>
+              <%= render 'comments/post_comment', post: post %>
+            <%end%>
+       </div>
+         <div class="comment-like-form row">
+          <div class="like-button col-sm-1">
+           <span class="glyphicon glyphicon-heart-empty"></span>
+           </div>
+          <div class="comment-form col-sm-1">
+            <%= form_for [post, post.comments.build], remote:true do |f| %>
+             <%= f.text_field :content, placeholder: 'Add a comment...' %>
+             <%= f.submit 'post' %>
+            <%end%>
+            </div>
+          </div>
+        </div>
+       </div>
+
+       <!-- <script>
+    $("#view_more").on("click", function () {
+
+        $.ajax({
+            url: "/load_more",
+            type: "GET",
+            data: $("#load-more-form").serialize(),
+            success: function (data) {
+                $(".paginate_list_block:last").html(data);
+                $("#current_pages").val(parseInt($("#current_pages").val()) + 3);
+            }
+        })
+    })
+</script> -->

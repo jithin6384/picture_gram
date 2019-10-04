@@ -1,0 +1,11 @@
+<div class="posts-wrapper row">
+
+ <% @posts.each do |post| %>
+
+
+   <%= render 'post', post: post %>
+    <%end%>
+    <div id="pagination">
+     <%= paginate @posts %>
+     </div>
+</div>
