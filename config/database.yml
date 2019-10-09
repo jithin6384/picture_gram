@@ -9,8 +9,8 @@ default: &default
   encoding: utf8
   pool: 5
   timeout: 5000
-  username: ubuntu
-  password: password
+  username: postgres
+  password: postgres
   host: localhost
 
 development:
