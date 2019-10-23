@@ -6,7 +6,9 @@ class PostsController < ApplicationController
 	def index
     @user = User.find(current_user.id)
     @posts = @user.posts 
-    @posts = Post.order(:name).page params[:page]
+    if @posts.present?
+      @posts = Post.order('created_at DESC').page params[:page]
+    end
 	end
 
 	def new 
@@ -18,7 +20,7 @@ class PostsController < ApplicationController
 	   @post = Post.new(permit_params)
      @post.user_id = current_user.id
 	   if @post.save
-		  redirect_to posts_path
+		  redirect_to root_path
 		  flash[:success]="Your post was created"
 	   else
 	   	  flash[:alert] = " your post was not created"
@@ -33,7 +35,7 @@ class PostsController < ApplicationController
 
     def update
       if @post.update(permit_params)
-           redirect_to posts_path
+           redirect_to root_path
            flash[:success]="your post was updated"
        else
           flash[:alert] = "your post was not updated"
@@ -41,7 +43,7 @@ class PostsController < ApplicationController
        end
     end
 	def show
-      
+  
 	end
 
 	def destroy

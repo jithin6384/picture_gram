@@ -1,5 +1,5 @@
 <div class="posts-wrapper row">
-
+<% if @posts.present? %>
  <% @posts.each do |post| %>
 
 
@@ -8,4 +8,5 @@
     <div id="pagination">
      <%= paginate @posts %>
      </div>
+     <%end%>
 </div>
